@@ -1,0 +1,10 @@
+{
+  "job_ingestion_webhook": {
+    "job_url": "https://example.com/jobs/123",
+    "source": "linkedin"
+  },
+  "skill_match_webhook": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456"
+  }
+}

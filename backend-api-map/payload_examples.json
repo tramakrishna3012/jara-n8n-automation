@@ -1,0 +1,43 @@
+{
+  "job_ingestion": {
+    "source": "linkedin",
+    "job_url": "https://example.com/jobs/123",
+    "title": "Software Engineer",
+    "company": "Example Co",
+    "location": "Remote",
+    "description": "Build developer tooling and automation workflows."
+  },
+  "skill_match": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "resume_id": "resume_789"
+  },
+  "resume_generation": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "target_role": "Software Engineer",
+    "highlight_skills": ["Python", "n8n", "FastAPI"]
+  },
+  "apply": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "resume_id": "resume_789",
+    "cover_letter_id": "cover_222"
+  },
+  "referral": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "referrer_id": "referrer_321",
+    "message": "Draft referral request with approval required."
+  },
+  "status_update": {
+    "application_id": "app_999",
+    "status": "submitted",
+    "notes": "Submitted via Greenhouse on 2025-03-20."
+  },
+  "error_log": {
+    "workflow": "02 Skill Match and Decision",
+    "execution_id": "exec_123",
+    "error_message": "HTTP 503 from backend"
+  }
+}
