@@ -1,0 +1,80 @@
+{
+  "name": "Global Error Workflow",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "Error Trigger",
+      "name": "Error Trigger",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "workflow",
+              "value": "={{$json.workflow.name}}"
+            },
+            {
+              "name": "execution_id",
+              "value": "={{$json.execution.id}}"
+            },
+            {
+              "name": "error_message",
+              "value": "={{$json.error.message}}"
+            }
+          ]
+        }
+      },
+      "id": "Normalize Error",
+      "name": "Normalize Error",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [520, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.JARA_BACKEND_URL}}/automation/error-log",
+        "method": "POST",
+        "sendBody": true,
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{$json}}"
+      },
+      "id": "Log Error",
+      "name": "Log Error",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [820, 300]
+    }
+  ],
+  "connections": {
+    "Error Trigger": {
+      "main": [
+        [
+          {
+            "node": "Normalize Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Error": {
+      "main": [
+        [
+          {
+            "node": "Log Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
+}
