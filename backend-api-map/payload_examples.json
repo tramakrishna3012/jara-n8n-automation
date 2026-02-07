@@ -1,0 +1,32 @@
+{
+  "job_ingestion": {
+    "source": "linkedin",
+    "job_url": "https://example.com/jobs/123",
+    "title": "Software Engineer",
+    "company": "Example Co",
+    "location": "Remote"
+  },
+  "skill_match": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456"
+  },
+  "resume_generation": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "target_role": "Software Engineer"
+  },
+  "apply": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "resume_id": "resume_789"
+  },
+  "referral": {
+    "job_id": "job_123",
+    "candidate_id": "candidate_456",
+    "referrer_id": "referrer_321"
+  },
+  "status_update": {
+    "application_id": "app_999",
+    "status": "submitted"
+  }
+}
