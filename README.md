@@ -11,6 +11,7 @@ assisted job applying, referral requests, and application tracking.
 - Assisted job applying
 - Referral drafting (human approval)
 - Application status tracking
+- Global error handling workflow for alerting
 
 ## Tech Stack
 - n8n (automation)
@@ -18,9 +19,16 @@ assisted job applying, referral requests, and application tracking.
 - Supabase (database)
 - Playwright (assisted automation)
 
+## Webhook Endpoints
+- `/webhook/job-ingestion`
+- `/webhook/skill-match`
+- `/webhook/resume-generation`
+- `/webhook/apply`
+- `/webhook/status-update`
+
 ## How to Use
 1. Deploy n8n (Cloud / Railway / Docker)
-2. Import workflows from `/workflows`
+2. Import workflows from `/workflows` and `error-handling/global_error_workflow.json`
 3. Update backend URLs in HTTP Request nodes
 4. Activate workflows in order
 5. Trigger via webhook

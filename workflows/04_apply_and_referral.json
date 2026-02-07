@@ -1,5 +1,108 @@
 {
   "name": "04 Apply and Referral",
-  "nodes": [],
-  "connections": {}
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "apply",
+        "responseMode": "lastNode"
+      },
+      "id": "Webhook",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {
+              "name": "job_id",
+              "value": "={{$json.job_id}}"
+            },
+            {
+              "name": "candidate_id",
+              "value": "={{$json.candidate_id}}"
+            },
+            {
+              "name": "resume_id",
+              "value": "={{$json.resume_id}}"
+            },
+            {
+              "name": "referrer_id",
+              "value": "={{$json.referrer_id}}"
+            }
+          ]
+        }
+      },
+      "id": "Normalize Payload",
+      "name": "Normalize Payload",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 2,
+      "position": [520, 300]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.JARA_BACKEND_URL}}/automation/apply",
+        "method": "POST",
+        "sendBody": true,
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{$json}}"
+      },
+      "id": "Apply",
+      "name": "Apply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [820, 240]
+    },
+    {
+      "parameters": {
+        "url": "={{$env.JARA_BACKEND_URL}}/automation/referral",
+        "method": "POST",
+        "sendBody": true,
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={{$json}}"
+      },
+      "id": "Request Referral",
+      "name": "Request Referral",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 3,
+      "position": [820, 360]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Normalize Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Normalize Payload": {
+      "main": [
+        [
+          {
+            "node": "Apply",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Request Referral",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "1"
 }
